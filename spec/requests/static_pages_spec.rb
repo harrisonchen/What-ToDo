@@ -14,5 +14,6 @@ describe "StaticPages" do
 
 		it { should have_title('What-ToDo') }
 		it { should_not have_title('|') }
+
 	end
 end
