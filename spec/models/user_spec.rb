@@ -17,6 +17,7 @@ describe User do
 	it { should respond_to(:authenticate) }
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:admin) }
+	it { should respond_to(:lists) }
 
 	it { should be_valid }
 	it { should_not be_admin }
@@ -113,5 +114,29 @@ describe User do
 	describe "remember token" do
 		before { @user.save }
 		its(:remember_token) { should_not be_blank }
+	end
+
+	describe "list associations" do
+
+		before { @user.save }
+		let!(:older_list) do
+			FactoryGirl.create(:list, user: @user, created_at: 1.day.ago)
+		end
+		let!(:newer_list) do
+			FactoryGirl.create(:list, user: @user, created_at: 1.day.ago)
+		end
+
+		it "should have the right lists in the right order" do
+			expect(@user.lists.to_a).to eq [newer_list, older_list]
+		end
+
+		it "should destroy associated lists" do
+			lists = @user.lists.to_a
+			@user.destroy
+			expect(lists).not_to be_empty
+			lists.each do |list|
+				expect(List.where(id: list.id)).to be_empty
+			end
+		end
 	end
 end

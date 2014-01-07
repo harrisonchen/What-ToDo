@@ -8,6 +8,12 @@ FactoryGirl.define do
     	factory :admin do
     		admin true
     	end
+
   	end
+
+    factory :list do
+            category "Groceries"
+            user
+    end
 end
 

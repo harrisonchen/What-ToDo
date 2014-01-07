@@ -15,5 +15,10 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+    users = User.all(limit: 6)
+    50.times do
+      category = "Groceries"
+      users.each { |user| user.lists.create!(category: category) }
+    end
   end
 end
