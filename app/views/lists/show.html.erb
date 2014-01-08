@@ -1,2 +1,5 @@
 <% provide(:title, @lists.category) %>
 <h1><%= @lists.category %></h1>
+
+<%= link_to 'delete', @list, class:"btn btn-danger", method: :delete,
+							data: { confirm: "Are you sure?" } %>

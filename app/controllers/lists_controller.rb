@@ -1,6 +1,7 @@
 class ListsController < ApplicationController
 	before_action :signed_in_user
-	before_action :correct_user, only: :show
+	before_action :list_exists, only: [:show, :edit, :destroy]
+	before_action :correct_user, only: [:show, :edit, :destroy]
 
 	def index
 		@user = User.find(current_user.id)
@@ -28,7 +29,16 @@ class ListsController < ApplicationController
 		end
 	end
 
+	def edit
+	end
+
+	def update
+	end
+
 	def destroy
+		flash[:success] = "#{@list.category} list successfully deleted"
+		@list.destroy
+		redirect_to lists_url
 	end
 
 	private
@@ -43,11 +53,19 @@ class ListsController < ApplicationController
   		end
 
   		def correct_user
-  			@user = User.find(current_user.id)
-  			@lists = @user.lists.find(params[:id])
-			if @lists.nil?
+  			@user = List.find(params[:id]).user
+			if !current_user?(@user)
+				flash[:notice] = "List # does not exist"
 				redirect_to lists_path
+			else
+				@list = @user.lists.find(params[:id])
 			end
+  		end
+
+  		def list_exists
+  			List.find(params[:id])
+  			rescue
+  				redirect_to lists_path
   		end
 
 end

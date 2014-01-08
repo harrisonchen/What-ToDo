@@ -1,6 +1,6 @@
 <li>
 	<span class="content"><%= link_to list.category, list_path(list) %></span>
 	<span class="timestamp">
-		<%= time_ago_in_words(list.created_at) %> ago.
+		Created <%= time_ago_in_words(list.created_at) %> ago.
 	</span>
 </li>
