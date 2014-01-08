@@ -1,5 +1,6 @@
 <li>
-	<span class="content"><%= link_to list.category, list_path(list) %></span>
+	<span class="content"><%= link_to "#{list.category} (#{list.tasks.count})", 
+								list_path(list) %></span>
 	<span class="timestamp">
 		Created <%= time_ago_in_words(list.created_at) %> ago.
 	</span>

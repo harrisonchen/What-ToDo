@@ -190,6 +190,46 @@ input {
 	margin: 0px 0px 10px 0px;
 }
 
+/* tasks */
+
+.tasks {
+	list-style: none;
+
+	li {
+		font-weight: bold;
+		padding: 3px 0;
+		border-top: 1px solid #eaeaea;
+
+		&:last-child {
+			border-bottom: 1px solid #eaeaea;
+		}
+	}
+}
+
+.task_container {
+	background-color: #FFFFCC;
+	margin: 0px 50px 0 50px;
+	padding-top: 10px;
+}
+
+.content {
+	display: block;
+}
+
+.timestamp {
+	font-weight: normal;
+}
+
+
+#delete-list-btn, #delete-task-btn {
+	font-weight: normal;
+	letter-spacing: 1px;
+}
+
+#task_dropdown {
+	float: right;
+}
+
 /*
 * {
 	border: 1px solid black;

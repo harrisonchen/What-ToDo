@@ -1,0 +1,13 @@
+<% provide(:title, 'Edit Task') %>
+
+<div class="center row">
+	<div class="span6 offset3">
+		<%= form_for(@task) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+			<%= f.label :content, 'Rename Task' %>
+			<%= f.text_field :content %>
+
+			<%= f.submit "Rename", class: "btn btn-large btn-info" %>
+		<% end %>
+	</div>
+</div>

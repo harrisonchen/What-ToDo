@@ -10,8 +10,12 @@ class ListsController < ApplicationController
 	end
 
 	def show
-		@user = User.find(current_user.id)
 		@lists = current_user.lists.find(params[:id])
+		@tasks = @lists.tasks.paginate(page: params[:page])
+		@task = @lists.tasks.build if signed_in?
+		#session[:list_id] = params[:id]
+		#session[:tasks] = @tasks
+		#session[:task] = @task
 	end
 
 	def new
@@ -25,6 +29,8 @@ class ListsController < ApplicationController
 			flash[:success] = "#{@list.category} list created!"
 			redirect_to lists_url
 		else
+			@list = current_user.lists.build if signed_in? # Comment if want form error
+			flash.now[:error] = "Please fill in the new category"
 			render 'lists/index'
 		end
 	end

@@ -1,0 +1,12 @@
+
+<% if !task.status? %>
+<li>
+ 	<span class="content">
+ 		<%= task.content %>	
+ 	</span>
+  	<span class="timestamp">
+   		Created <%= time_ago_in_words(task.created_at) %> ago.
+  	</span>
+</li>
+
+<% end %>

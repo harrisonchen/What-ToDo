@@ -15,5 +15,12 @@ FactoryGirl.define do
             category "Groceries"
             user
     end
+
+    factory :task do
+        content "homework"
+        status false
+        important false
+        list
+    end
 end
 

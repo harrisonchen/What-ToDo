@@ -1,0 +1,12 @@
+<% @tasks.each do |task| %>
+<div id="task_dropdown">
+  	<div class="dropdown">
+	        <button type="button" class="btn btn-default dropdown-toggle" 
+	        	data-toggle="dropdown">Options <span class="caret"></span></button>
+	        <ul class="dropdown-menu">
+		        <li><%= link_to 'edit', edit_task_path(task) %></li>
+		        <li class="divider"></li>
+		        <li><%= link_to 'delete', task, id:"delete-task-btn" %></li>
+	        </ul>
+</div>
+<% end %>

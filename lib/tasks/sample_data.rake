@@ -20,5 +20,9 @@ namespace :db do
       category = "Groceries"
       users.each { |user| user.lists.create!(category: category) }
     end
+    50.times do
+      content = "tasks"
+      users.each { |user| user.lists.first.tasks.create!(content: content) }
+    end
   end
 end

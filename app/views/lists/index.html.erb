@@ -15,11 +15,11 @@
 <!--<%= link_to "New List", new_list_path, id:"new-list-btn", class:"btn btn-large btn-primary" %> -->
 </div>
 
-<div class="list_container center">
-	<% if current_user.lists.any? %>
+<% if @lists.any? %>
+	<div class="list_container center">
 		<ul class="lists">
 			<%= render @lists %>
 		</ul>
-		<%= will_paginate %>
-	<% end %>
-</div>
+		<%= will_paginate @lists %>
+	</div>
+<% end %>

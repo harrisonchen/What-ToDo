@@ -31,6 +31,27 @@ describe List do
 		it { should_not be_valid }
 	end
 
-	
+	describe "task associations" do
+		before { @list.save }
+		let!(:older_task) do
+			FactoryGirl.create(:task, list: @list, created_at: 1.day.ago)
+		end
+		let!(:newer_task) do
+			FactoryGirl.create(:task, list: @list, created_at: 1.hour.ago)
+		end
+
+		it "should have the right tasks in the right order" do
+			expect(@list.tasks.to_a).to eq [newer_task, older_task]
+		end
+
+		it "should destory associated tasks" do
+			tasks = @list.tasks.to_a
+			@list.destroy
+			expect(tasks).not_to be_empty
+			tasks.each do |task|
+				expect(Task.where(id: task.id)).to be_empty
+			end
+		end
+	end
 
 end
