@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
 	before_action :signed_in_user
-	before_action :list_exists, only: [:show, :edit, :destroy]
-	before_action :correct_user, only: [:show, :edit, :destroy]
+	before_action :list_exists , only: [:show, :edit, :destroy]
+	before_action :correct_user , only: [:show, :edit, :destroy]
 
 	def index
 		@user = User.find(current_user.id)
@@ -62,7 +62,7 @@ class ListsController < ApplicationController
   			@user = List.find(params[:id]).user
 			if !current_user?(@user)
 				flash[:notice] = "List # does not exist"
-				redirect_to lists_path
+				redirect_to root_url
 			else
 				@list = @user.lists.find(params[:id])
 			end
@@ -71,7 +71,7 @@ class ListsController < ApplicationController
   		def list_exists
   			List.find(params[:id])
   			rescue
-  				redirect_to lists_path
+  				redirect_to root_url
   		end
 
 end

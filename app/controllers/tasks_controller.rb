@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   	before_action :signed_in_user
+    before_action :task_exists , only: [:show, :edit, :destroy]
+  before_action :correct_user , only: [:show, :edit, :destroy]
 
   	def create
   		current_list = List.find(params[:list_id])
@@ -49,5 +51,20 @@ class TasksController < ApplicationController
   		def task_params
   			params.require(:task).permit(:content)
   		end
+
+      def correct_user
+        @task = Task.find(params[:id])
+        @user = @task.list.user
+        if !current_user?(@user)
+          flash[:notice] = "Task # does not exist"
+          redirect_to root_url
+        end
+      end
+
+      def task_exists
+        Task.find(params[:id])
+        rescue
+          redirect_to root_url
+      end
 
 end

@@ -74,8 +74,21 @@ describe "AuthenticationPages" do
               specify { expect(response).to redirect_to(signin_path) }
             end
 
-            describe "submitting to the destory action" do
+            describe "submitting to the destroy action" do
               before { delete list_path(FactoryGirl.create(:list)) }
+              specify { expect(response).to redirect_to(signin_path) }
+            end
+          end
+
+          describe "in the Tasks controller" do
+
+            describe "submitting to the create action" do
+              before { post tasks_path }
+              specify { expect(response).to redirect_to(signin_path) }
+            end
+
+            describe "submitting to the destroy action" do
+              before { delete task_path(FactoryGirl.create(:list)) }
               specify { expect(response).to redirect_to(signin_path) }
             end
           end
@@ -111,6 +124,30 @@ describe "AuthenticationPages" do
         describe "submitting a PATCH request to the Users#update action" do
           before { patch user_path(wrong_user) }
           specify { expect(response).to redirect_to(root_url) }
+        end
+
+        
+      end
+    end
+
+    describe "as wrong user in list and task path" do
+      let(:user) { FactoryGirl.create(:user, email: "blahblah@example.com") }
+      let(:wrong_user) { FactoryGirl.create(:task) }
+      before { sign_in user, no_capybara: true }
+
+      describe "in the Lists controller" do
+
+        describe "submitting to the destroy action" do
+          before { delete list_path(wrong_user) }
+          specify { expect(response).to redirect_to(root_url) }
+        end
+      end
+
+        describe "in the Tasks controller" do
+
+          describe "submitting to the destroy action" do
+            before { delete task_path(wrong_user) }
+            specify { expect(response).to redirect_to(root_url) }
         end
       end
     end
