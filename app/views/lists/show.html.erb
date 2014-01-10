@@ -1,37 +1,42 @@
 <% provide(:title, @lists.category) %>
 <div class="center">
-<h1><%= @lists.category %> (<%= @lists.tasks.count %>)
-	<%= link_to 'delete list', @list, id:"delete-list-btn", class:"btn btn-danger", method: :delete,
-							data: { confirm: "Are you sure?" } %>
-</h1>
-<div class="row">
-	<div class="span6 offset3">
-		<%= form_for(@task) do |f| %>
-			<%= hidden_field_tag :list_id, @lists.id %>
-			<%= render 'shared/error_messages', object: f.object %>
-			<%= f.label :content, 'New Task' %>
-			<%= f.text_field :content %>
+	<h1><%= @lists.category %> (<%= @lists.tasks.count %>)
+		<%= link_to 'delete list', @list, id:"delete-list-btn", class:"btn btn-danger", method: :delete,
+								data: { confirm: "Are you sure?" } %>
+	</h1>
+	<div class="row">
+		<div class="span6 offset3">
+			<%= form_for(@task) do |f| %>
+				<%= hidden_field_tag :list_id, @lists.id %>
+				<%= render 'shared/error_messages', object: f.object %>
+				<%= f.label :content, 'New Task' %>
+				<%= f.text_field :content %>
 
-			<%= f.submit "Add new task", class: "btn btn-large btn-primary" %>
+				<%= f.submit "Add new task", class: "btn btn-large btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="task_container">
+	<div class="task_name_container">
+		<% if @tasks.any? %>
+			<div class="tasks">
+				<ul>
+					<%= render @tasks %>
+				</ul>
+				<%= will_paginate @tasks %>
+			</div>
 		<% end %>
-	</div>
-</div>
-
-</div>
-
-<% if @tasks.any? %>
-	<div class="task_container center">
-		<ul class="tasks">
-			<%= render @tasks %>
-		</ul>
-		<%= will_paginate @tasks %>
-	</div>
-<% end %>
-<% if @tasks.any? %>
-	<div class="">
-		<ul class="">
-			<%= render 'lists/task_options' %>
-		</ul>
-		<%= will_paginate @tasks %>
-	</div>
-<% end %>
+	</div><!-- end of task_name_container -->
+	<div class="task_options_container">
+		<% if @tasks.any? %>
+			<div class="task_options">
+				<ul class="">
+					<%= render 'lists/task_options' %>
+				</ul>
+		
+			</div>
+		<% end %>
+	</div><!-- end of task_options_container -->
+</div><!-- end of task_container -->
