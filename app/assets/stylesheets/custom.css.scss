@@ -195,12 +195,13 @@ input {
 .task_container {
 	background-color: #FFFFCC;
 	margin: 0px 50px 0px 50px;
+	padding-bottom: 75px;
 	//border: 1px solid black;
 	overflow: hidden;
 
 	.task_name_container {
 		width: 86%;
-		text-align: center;
+		//text-align: center;
 		//border: 1px solid black;
 		margin: 0;
 		float: left;

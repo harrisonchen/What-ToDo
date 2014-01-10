@@ -1,5 +1,6 @@
 <% @tasks.each do |task| %>
-  	<div id="task_option" class="dropdown">
+<div id="task_option">
+  	<div class="dropdown">
 	        <button type="button" class="btn btn-default dropdown-toggle" 
 	        	data-toggle="dropdown">Options <span class="caret"></span></button>
 	        <ul class="dropdown-menu">
@@ -9,4 +10,5 @@
 		        		method: :delete, data: { confirm: "Are you sure?"} %></li>
 	        </ul>
 	</div>
+</div>
 <% end %>
