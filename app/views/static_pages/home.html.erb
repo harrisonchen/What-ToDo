@@ -1,7 +1,12 @@
-<div class="center hero-unit">
-	<h1>Welcome to What-ToDo</h1>
+<% if signed_in? %>
+<h1>Important Tasks</h1>
+<%= render 'static_pages/important_list' %>
+<% else %>
+	<div class="center hero-unit">
+		<h1>Welcome to What-ToDo</h1>
 
-	<h2>Your personal To-Do list</h2>
+		<h2>Your personal To-Do list</h2>
 
-	<%= link_to "Sign up now!", signup_path, class:"btn btn-large btn-primary" %>
-</div>
+		<%= link_to "Sign up now!", signup_path, class:"btn btn-large btn-primary" %>
+	</div>
+<% end %>

@@ -11,6 +11,10 @@
 				<%= render 'shared/error_messages', object: f.object %>
 				<%= f.label :content, 'New Task' %>
 				<%= f.text_field :content %>
+				<div class="important-btn">
+					<%= f.label :important, 'Important' %>
+					<%= f.check_box :important %><br />
+				</div>
 
 				<%= f.submit "Add new task", class: "btn btn-large btn-primary" %>
 			<% end %>
@@ -29,14 +33,4 @@
 			</div>
 		<% end %>
 	</div><!-- end of task_name_container -->
-	<div class="task_options_container">
-		<% if @tasks.any? %>
-			<div class="task_options">
-				<ul class="">
-					<%= render 'lists/task_options' %>
-				</ul>
-		
-			</div>
-		<% end %>
-	</div><!-- end of task_options_container -->
 </div><!-- end of task_container -->

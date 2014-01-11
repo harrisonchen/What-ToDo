@@ -1,5 +1,26 @@
 
-<% if !task.status? %>
+<div id="task_optionx">
+  	<div class="dropdown">
+	    <button type="button" class="btn btn-default dropdown-toggle" 
+	        	data-toggle="dropdown">Options <span class="caret"></span></button>
+	    <ul class="dropdown-menu">
+	    	<% params = {id: task.id, content: task.content, status: task.status, important: task.important} %>
+	    	<% if !task.important %>
+	    		<li><%= link_to 'important', 
+	    					update_task_path(id: task.id, content: task.content, status: task.status, 
+	    										important: true), method: :patch %></li> 
+	    	<% else %>
+				<li><%= link_to 'unimportant', update_task_path(id: task.id, content: task.content, status: task.status, 
+	    										important: false), method: :patch %></li> 
+	    	<% end %>
+	        <li><%= link_to 'edit', edit_task_path(task) %></li>
+	        <!--<li class="divider"></li>-->
+	        <li><%= link_to 'delete', task, id:"delete-task-btn",
+	        		method: :delete, data: { confirm: "Are you sure?"} %></li>
+        </ul>
+	</div>
+</div>
+
 <li>
  	<span class="content">
  		<%= task.content %>	
@@ -8,5 +29,3 @@
    		Posted <%= time_ago_in_words(task.created_at) %> ago.
   	</span>
 </li>
-
-<% end %>

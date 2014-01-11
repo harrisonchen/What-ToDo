@@ -157,8 +157,14 @@ input {
 
 /* lists */
 
+#important-list-name {
+	text-align: none;
+
+}
+
 .lists {
 	list-style: none;
+	padding-right: 24px;
 
 	li {
 		font-weight: bold;
@@ -192,15 +198,33 @@ input {
 
 /* tasks */
 
+#important-task-option {
+	float: right;
+	border-top: 1px solid #eaeaea;
+
+			&:first-child {
+				border-top: none;
+			}
+
+			&:last-child {
+				border-bottom: 1px solid #eaeaea;
+			}
+}
+
+#task_optionx {
+	float: right;
+	padding-top: 8px;
+}
+
 .task_container {
 	background-color: #FFFFCC;
 	margin: 0px 50px 0px 50px;
-	padding-bottom: 75px;
+	padding-bottom: 100px;
 	//border: 1px solid black;
 	overflow: hidden;
 
 	.task_name_container {
-		width: 86%;
+		width: 97%%;
 		//text-align: center;
 		//border: 1px solid black;
 		margin: 0;
@@ -258,6 +282,33 @@ input {
 	font-weight: normal;
 	letter-spacing: 1px;
 }
+
+#delete-list-btn {
+	text-align: none;
+}
+
+.important-btn {
+
+	label {
+		display: block;
+		//padding-left: 15px;
+	}
+
+	input {
+		width: 13px;
+	    height: 13px;
+	    padding: 0;
+	    margin:0;
+	    vertical-align: right;
+	    position: relative;
+	    top: -1px;
+	    *overflow: hidden;
+	}
+
+}
+
+
+
 
 /*
 * {

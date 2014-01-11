@@ -1,0 +1,73 @@
+<div class="task_container">
+	<div class="task_name_container">
+		<% if current_user.lists.any? %>
+			<% current_user.lists.each do |list| %>
+				<% legit = false %>
+				<% list.tasks.each do |task| %>
+					<% if task.important && !task.status %>
+						<% legit = true %>
+					<% end %>
+				<% end %>
+				<% if legit == true %>
+					<% if list.tasks.any? %>
+						<div class="tasks">
+							<ul>
+								<h3 id="important-list-name"><%= list.category %> [!]</h3>
+								<% list.tasks.each do |task| %>
+									<% if task.important && !task.status %>
+
+
+									<div id="task_optionx">
+  	<div class="dropdown">
+	        <button type="button" class="btn btn-default dropdown-toggle" 
+	        	data-toggle="dropdown">Options <span class="caret"></span></button>
+	        <ul class="dropdown-menu">
+	        	<% if !task.important %>
+		    		<li><%= link_to 'important', 
+		    					update_task_path(id: task.id, content: task.content, status: task.status, 
+		    										important: true), method: :patch %></li> 
+		    	<% else %>
+					<li><%= link_to 'unimportant', update_task_path(id: task.id, content: task.content, status: task.status, 
+		    										important: false), method: :patch %></li> 
+		    	<% end %>
+		        <li><%= link_to 'edit', edit_task_path(task) %></li>
+		        <!--<li class="divider"></li>-->
+		        <li><%= link_to 'delete', task, id:"delete-task-btn",
+		        		method: :delete, data: { confirm: "Are you sure?"} %></li>
+	        </ul>
+	</div>
+</div>
+
+
+										<li>
+										 	<span class="content">
+										 		<%= task.content %>	
+										 	</span>
+										  	<span class="timestamp">
+										   		Posted <%= time_ago_in_words(task.created_at) %> ago.
+										  	</span>
+										</li>
+									<% end %>
+								<% end %>
+							</ul>
+						</div>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div><!-- end of task_name_container -->
+</div>
+
+<% if false %>
+	<div class="task_options_container">
+		<% if @tasks.any? %>
+			<div class="task_options">
+				<ul class="">
+					<%= render 'lists/task_options' %>
+				</ul>
+		
+			</div>
+		<% end %>
+	</div><!-- end of task_options_container -->
+</div><!-- end of task_container -->
+<% end %>

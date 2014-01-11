@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   	before_action :signed_in_user
     before_action :task_exists , only: [:show, :edit, :destroy]
-  before_action :correct_user , only: [:show, :edit, :destroy]
+    before_action :correct_user , only: [:show, :edit, :destroy]
 
   	def create
   		current_list = List.find(params[:list_id])
@@ -25,7 +25,9 @@ class TasksController < ApplicationController
 
   	def update
   		@task = Task.find(params[:id])
-  		@task.content = task_params[:content]
+  		@task.content = params[:content]
+      @task.status = params[:status]
+      @task.important = params[:important]
   		list = @task.list
   		if @task.save
   			flash[:success] = "Task successfully editted"
@@ -49,7 +51,7 @@ class TasksController < ApplicationController
   	private
 
   		def task_params
-  			params.require(:task).permit(:content)
+  			params.require(:task).permit(:content, :status, :important)
   		end
 
       def correct_user

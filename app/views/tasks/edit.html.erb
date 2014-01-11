@@ -7,7 +7,12 @@
 			<%= f.label :content, 'Rename Task' %>
 			<%= f.text_field :content %>
 
-			<%= f.submit "Rename", class: "btn btn-large btn-info" %>
+			<div class="important-btn">
+				<%= f.label :important, 'Important' %>
+				<%= f.check_box :important %><br />
+			</div>
+
+			<%= f.submit "Post", class: "btn btn-large btn-info" %>
 		<% end %>
 	</div>
 </div>
