@@ -25,9 +25,15 @@ class TasksController < ApplicationController
 
   	def update
   		@task = Task.find(params[:id])
+      if params.has_key?(:task)
+        @task.content = task_params[:content]
+      @task.status = task_params[:status]
+      @task.important = task_params[:important]
+      else
   		@task.content = params[:content]
       @task.status = params[:status]
       @task.important = params[:important]
+      end
   		list = @task.list
   		if @task.save
   			flash[:success] = "Task successfully editted"

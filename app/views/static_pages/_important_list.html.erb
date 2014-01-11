@@ -24,10 +24,10 @@
 	        <ul class="dropdown-menu">
 	        	<% if !task.important %>
 		    		<li><%= link_to 'important', 
-		    					update_task_path(id: task.id, content: task.content, status: task.status, 
+		    					task_path(id: task.id, content: task.content, status: task.status, 
 		    										important: true), method: :patch %></li> 
 		    	<% else %>
-					<li><%= link_to 'unimportant', update_task_path(id: task.id, content: task.content, status: task.status, 
+					<li><%= link_to 'unimportant', task_path(id: task.id, content: task.content, status: task.status, 
 		    										important: false), method: :patch %></li> 
 		    	<% end %>
 		        <li><%= link_to 'edit', edit_task_path(task) %></li>
