@@ -1,6 +1,7 @@
 <% provide(:title, @lists.category) %>
 <div class="center">
-	<h1><%= @lists.category %> (<%= @lists.tasks.count %>)
+	<% num_tasks_left = @lists.tasks.find_all_by_status(false) %>
+	<h1><%= @lists.category %> (<%= num_tasks_left.count %>)
 		<%= link_to 'delete list', @list, id:"delete-list-btn", class:"btn btn-danger", method: :delete,
 								data: { confirm: "Are you sure?" } %>
 	</h1>

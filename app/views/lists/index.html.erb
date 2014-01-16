@@ -1,18 +1,17 @@
 <% provide(:title, 'Lists') %>
 <div class="center">
-<h1>To-Do Lists (<%= current_user.lists.count %>)</h1>
-<div class="row">
-	<div class="span6 offset3">
-		<%= form_for(@list) do |f| %>
-			<%= render 'shared/error_messages', object: f.object %>
-			<%= f.label :category, 'New Category' %>
-			<%= f.text_field :category %>
+	<h1>To-Do Lists (<%= current_user.lists.count %>)</h1>
+	<div class="row">
+		<div class="span6 offset3">
+			<%= form_for(@list) do |f| %>
+				<%= render 'shared/error_messages', object: f.object %>
+				<%= f.label :category, 'New Category' %>
+				<%= f.text_field :category %>
 
-			<%= f.submit "Add new list", class: "btn btn-large btn-primary" %>
-		<% end %>
+				<%= f.submit "Add new list", class: "btn btn-large btn-primary" %>
+			<% end %>
+		</div>
 	</div>
-</div>
-<!--<%= link_to "New List", new_list_path, id:"new-list-btn", class:"btn btn-large btn-primary" %> -->
 </div>
 
 <% if @lists.any? %>

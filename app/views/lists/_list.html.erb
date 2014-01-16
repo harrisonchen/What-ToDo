@@ -1,5 +1,6 @@
+<% num_tasks_left = list.tasks.find_all_by_status(false) %>
 <li>
-	<span class="content"><%= link_to "#{list.category} (#{list.tasks.count})", 
+	<span class="content"><%= link_to "#{list.category} (#{num_tasks_left.count})", 
 								list_path(list) %></span>
 	<span class="timestamp">
 		Created <%= time_ago_in_words(list.created_at) %> ago.
