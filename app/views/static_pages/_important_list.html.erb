@@ -4,7 +4,7 @@
 			<% current_user.lists.each do |list| %>
 				<% legit = false %>
 				<% list.tasks.each do |task| %>
-					<% if task.important #&& !task.status %>
+					<% if task.important %>
 						<% legit = true %>
 					<% end %>
 				<% end %>
@@ -12,51 +12,11 @@
 					<% if list.tasks.any? %>
 						<div class="tasks">
 							<ul>
-								<h3 id="important-list-name"><%= list.category %> [!]</h3>
+								<% num_tasks_left = list.tasks.find_all_by_status(false) %>
+								<h3 id="important-list-name"><%= link_to "#{list.category} (#{num_tasks_left.count})", list_path(list) %></h3>
 								<% list.tasks.each do |task| %>
-									<% if task.important #&& !task.status %>
-
-
-
-									<div id="task_optionx">
-
-
-
-  	<div class="dropdown">
-	        <button type="button" class="btn btn-default dropdown-toggle" 
-	        	data-toggle="dropdown">Options <span class="caret"></span></button>
-	        <ul class="dropdown-menu">
-	        	<% if !task.important %>
-		    		<li><%= link_to 'important', 
-		    					task_path(id: task.id, content: task.content, status: task.status, 
-		    										important: true), method: :patch %></li> 
-		    	<% else %>
-					<li><%= link_to 'unimportant', task_path(id: task.id, content: task.content, status: task.status, 
-		    										important: false), method: :patch %></li> 
-		    	<% end %>
-		        <li><%= link_to 'edit', edit_task_path(task) %></li>
-		        <!--<li class="divider"></li>-->
-		        <li><%= link_to 'delete', task, id:"delete-task-btn",
-		        		method: :delete, data: { confirm: "Are you sure?"} %></li>
-	        </ul>
-	</div>
-</div>
-
-<% if !task.status %>
-	<div id="complete-btn">
-		<%= button_to "complete", task_path(id: task.id, content: task.content, status: true, 
-		    										important: task.important), method: :patch %>
-	</div>
-<% else %>
-	<div id="complete-btn">
-		<%= button_to "incomplete", task_path(id: task.id, content: task.content, status: false, 
-		    										important: task.important), method: :patch %>
-	</div>
-<% end %>
-
-
-
-
+									<% if task.important %>
+										<%= render 'static_pages/important_task_options', task: task %>
 										<li>
 										 	<span class="content">
 										 		<% if task.status %>
@@ -81,17 +41,3 @@
 		<% end %>
 	</div><!-- end of task_name_container -->
 </div>
-
-<% if false %>
-	<div class="task_options_container">
-		<% if @tasks.any? %>
-			<div class="task_options">
-				<ul class="">
-					<%= render 'lists/task_options' %>
-				</ul>
-		
-			</div>
-		<% end %>
-	</div><!-- end of task_options_container -->
-</div><!-- end of task_container -->
-<% end %>

@@ -4,75 +4,74 @@ class TasksController < ApplicationController
     before_action :correct_user , only: [:show, :edit, :destroy]
 
   	def create
-  		current_list = List.find(params[:list_id])
-  		@task = current_list.tasks.build(task_params)
-  		if @task.save
-  			cookies.delete(:list_id)
-  			flash[:success] = "New task created!"
-  			redirect_to current_list
-  		else
-  			@lists = current_list
-			@tasks = @lists.tasks.paginate(page: params[:page])
-			@task = @lists.tasks.build if signed_in? # Comment if want form error
-			flash.now[:error] = "Please fill in the new task"
-  			render 'lists/show'
-  		end
+  		  current_list = List.find(params[:list_id])
+  		  @task = current_list.tasks.build(task_params)
+    		if @task.save
+      			cookies.delete(:list_id)
+      			flash[:success] = "New task created!"
+      			redirect_to current_list
+    		else
+      			@lists = current_list
+      			@tasks = @lists.tasks.paginate(page: params[:page])
+      			@task = @lists.tasks.build if signed_in? # Comment if want form error
+      			flash.now[:error] = "Please fill in the new task"
+      			render 'lists/show'
+  		  end
   	end
 
   	def edit
-  		@task = Task.find(params[:id])
+  		  @task = Task.find(params[:id])
   	end
 
   	def update
-  		@task = Task.find(params[:id])
-      if params.has_key?(:task)
-        @task.content = task_params[:content]
-      @task.status = task_params[:status]
-      @task.important = task_params[:important]
-      else
-  		@task.content = params[:content]
-      @task.status = params[:status]
-      @task.important = params[:important]
-      end
-  		list = @task.list
-  		if @task.save
-  			flash[:success] = "Task successfully editted"
-  			redirect_to list
-  		else
-  			flash.now[:error] = "Please fill in task name"
-  			@task = Task.find(params[:id])
-  			render 'tasks/edit'
-  		end
-  		
+    		@task = Task.find(params[:id])
+        if params.has_key?(:task)
+            @task.content = task_params[:content]
+            @task.status = task_params[:status]
+            @task.important = task_params[:important]
+        else
+        		@task.content = params[:content]
+            @task.status = params[:status]
+            @task.important = params[:important]
+        end
+    		list = @task.list
+    		if @task.save
+      			flash[:success] = "Task successfully editted"
+      			redirect_to list
+    		else
+      			flash.now[:error] = "Please fill in task name"
+      			@task = Task.find(params[:id])
+      			render 'tasks/edit'
+    		end
   	end
 
   	def destroy
-  		@task = Task.find(params[:id])
-  		list = @task.list
-  		flash[:success] = "#{@task.content} task deleted"
-  		@task.destroy
-  		redirect_to list
+    		@task = Task.find(params[:id])
+    		list = @task.list
+    		flash[:success] = "#{@task.content} task deleted"
+    		@task.destroy
+    		redirect_to list
   	end
 
   	private
 
-  		def task_params
-  			params.require(:task).permit(:content, :status, :important)
-  		end
+    		def task_params
+    			  params.require(:task).permit(:content, :status, :important)
+    		end
 
-      def correct_user
-        @task = Task.find(params[:id])
-        @user = @task.list.user
-        if !current_user?(@user)
-          flash[:notice] = "Task # does not exist"
-          redirect_to root_url
+        def correct_user
+            @task = Task.find(params[:id])
+            @user = @task.list.user
+            if !current_user?(@user)
+                flash[:notice] = "Task # does not exist"
+                redirect_to root_url
+            end
         end
-      end
 
-      def task_exists
-        Task.find(params[:id])
-        rescue
-          redirect_to root_url
-      end
+        def task_exists
+            Task.find(params[:id])
+            rescue
+                redirect_to root_url
+        end
 
 end

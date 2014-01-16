@@ -1,15 +1,16 @@
-<div id="task_optionx">
+<div id="task_options">
 	<div class="dropdown">
 	    <button type="button" class="btn btn-default dropdown-toggle" 
 	   	    	data-toggle="dropdown">Options <span class="caret"></span></button>
 	    <ul class="dropdown-menu">
 	      	<% if !task.important %>
-	    		<li><%= link_to 'important', 
-		    					task_path(id: task.id, content: task.content, status: task.status, 
-		    										important: true), method: :patch %></li> 
+	    		<li><%= link_to 'important', task_path(id: task.id, 
+	    		content: task.content, status: task.status, 
+	    		important: true), method: :patch %></li> 
 		   	<% else %>
-				<li><%= link_to 'unimportant', task_path(id: task.id, content: task.content, status: task.status, 
-		    										important: false), method: :patch %></li> 
+				<li><%= link_to 'unimportant', task_path(id: task.id, 
+				content: task.content, status: task.status, 
+				important: false), method: :patch %></li> 
 		 	<% end %>
 		    <li><%= link_to 'edit', edit_task_path(task) %></li>
 	        <!--<li class="divider"></li>-->
@@ -21,12 +22,10 @@
 
 <% if !task.status %>
 	<div id="complete-btn">
-		<%= button_to "complete", task_path(id: task.id, content: task.content, status: true, 
-		    										important: task.important), method: :patch %>
+		<%= button_to "complete", task_path(id: task.id, content: task.content, status: true, important: task.important), method: :patch %>
 	</div>
 <% else %>
 	<div id="complete-btn">
-		<%= button_to "incomplete", task_path(id: task.id, content: task.content, status: false, 
-		    										important: task.important), method: :patch %>
+		<%= button_to "incomplete", task_path(id: task.id, content: task.content, status: false, important: task.important), method: :patch %>
 	</div>
 <% end %>
