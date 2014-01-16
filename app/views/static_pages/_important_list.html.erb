@@ -4,7 +4,7 @@
 			<% current_user.lists.each do |list| %>
 				<% legit = false %>
 				<% list.tasks.each do |task| %>
-					<% if task.important && !task.status %>
+					<% if task.important #&& !task.status %>
 						<% legit = true %>
 					<% end %>
 				<% end %>
@@ -14,10 +14,14 @@
 							<ul>
 								<h3 id="important-list-name"><%= list.category %> [!]</h3>
 								<% list.tasks.each do |task| %>
-									<% if task.important && !task.status %>
+									<% if task.important #&& !task.status %>
+
 
 
 									<div id="task_optionx">
+
+
+
   	<div class="dropdown">
 	        <button type="button" class="btn btn-default dropdown-toggle" 
 	        	data-toggle="dropdown">Options <span class="caret"></span></button>
@@ -38,10 +42,30 @@
 	</div>
 </div>
 
+<% if !task.status %>
+	<div id="complete-btn">
+		<%= button_to "complete", task_path(id: task.id, content: task.content, status: true, 
+		    										important: task.important), method: :patch %>
+	</div>
+<% else %>
+	<div id="complete-btn">
+		<%= button_to "incomplete", task_path(id: task.id, content: task.content, status: false, 
+		    										important: task.important), method: :patch %>
+	</div>
+<% end %>
+
+
+
 
 										<li>
 										 	<span class="content">
-										 		<%= task.content %>	
+										 		<% if task.status %>
+										 			<strike>
+										 				<%= task.content %>
+										 			</strike>
+										 		<% else %>
+										 			<%= task.content %>	
+										 		<% end %>
 										 	</span>
 										  	<span class="timestamp">
 										   		Posted <%= time_ago_in_words(task.created_at) %> ago.

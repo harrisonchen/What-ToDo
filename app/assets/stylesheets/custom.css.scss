@@ -10,6 +10,11 @@
 
 /* universal */
 
+header, section, footer, aside,
+nav, article, figure, figcaption {
+	display: block;
+}
+
 html {
 	overflow-y: scroll;
 	//background-color: #FFFFCC
@@ -212,8 +217,23 @@ input {
 }
 
 #task_optionx {
+	//border: 1px solid black;
 	float: right;
 	padding-top: 8px;
+}
+
+#complete-btn {
+	float: right;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+	padding-top: 12px;
+	padding-right: 8px;
+
+	form, input {
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+	}
+
 }
 
 .task_container {
