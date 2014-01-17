@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   		if @user.save
   			sign_in @user
   			flash[:success] = "Welcome to What-ToDo!"
-  			redirect_to @user
+  			redirect_to lists_path
   		else
   			render 'new'
   		end
