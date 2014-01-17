@@ -21,6 +21,7 @@ class TasksController < ApplicationController
 
   	def edit
   		  @task = Task.find(params[:id])
+        store_path list_path(@task.list)
   	end
 
   	def update
@@ -37,7 +38,7 @@ class TasksController < ApplicationController
     		list = @task.list
     		if @task.save
       			flash[:success] = "Task successfully editted"
-      			redirect_to list
+      			redirect_back_or root_path
     		else
       			flash.now[:error] = "Please fill in task name"
       			@task = Task.find(params[:id])

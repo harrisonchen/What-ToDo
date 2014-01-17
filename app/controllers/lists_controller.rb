@@ -13,9 +13,7 @@ class ListsController < ApplicationController
 		@lists = current_user.lists.find(params[:id])
 		@tasks = @lists.tasks.paginate(page: params[:page])
 		@task = @lists.tasks.build if signed_in?
-		#session[:list_id] = params[:id]
-		#session[:tasks] = @tasks
-		#session[:task] = @task
+		store_path list_path(@list)
 	end
 
 	def new

@@ -40,6 +40,10 @@ module SessionsHelper
   		session[:return_to] = request.url if request.get?
   	end
 
+    def store_path(path)
+      session[:return_to] = path
+    end
+
   	# Before filters
 
   	def signed_in_user
