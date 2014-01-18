@@ -28,10 +28,12 @@ class TasksController < ApplicationController
     		@task = Task.find(params[:id])
         if params.has_key?(:task)
             @task.content = task_params[:content]
-            @task.status = task_params[:status]
+            if task_params.has_key?(:status)
+                @task.status = task_params[:status]
+            end
             @task.important = task_params[:important]
         else
-        		@task.content = params[:content]
+        		#@task.content = params[:content]
             @task.status = params[:status]
             @task.important = params[:important]
         end
