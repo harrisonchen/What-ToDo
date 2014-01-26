@@ -21,11 +21,11 @@
 </div>
 
 <% if !task.status %>
-	<div id="complete-btn">
+	<div class="complete-btn">
 		<%= button_to "complete", task_path(id: task.id, content: task.content, status: true, important: task.important), method: :patch %>
 	</div>
 <% else %>
-	<div id="complete-btn">
+	<div class="complete-btn">
 		<%= button_to "incomplete", task_path(id: task.id, content: task.content, status: false, important: task.important), method: :patch %>
 	</div>
 <% end %>
